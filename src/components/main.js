@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {Search} from './search'
+import Head from './head'
 
 class main extends Component {
     constructor(props) {
@@ -14,12 +15,15 @@ class main extends Component {
         this.setState({
             data: false
         })
-        let data = await fetch(`https://pixabay.com/api/?key=20223274-42276db0604df23b312b7ef2f&q=${value}&image_type=photo`);
+        let amount = 25
+        let data = await fetch(`https://pixabay.com/api/?key=20223274-42276db0604df23b312b7ef2f&q=${value}&safesearch=true&image_type=photo&per_page=${amount}`);
         data = await data.json()
         this.setState({
-            data: data.hits
+            data: data.hits,
+            val: value,
+            amount: amount
         })
-        console.log(data)
+        console.log()
     }
 
     imageSize = (size) => {
@@ -27,6 +31,18 @@ class main extends Component {
             return 'row-span-2 h-full'
         }
     }
+
+    more = async() => {
+        let moreData = this.state.amount * 2
+        console.log(this.state.amount)
+        let data = await fetch(`https://pixabay.com/api/?key=20223274-42276db0604df23b312b7ef2f&q=${this.state.val}&safesearch=true&image_type=photo&per_page=${moreData}`);
+        data = await data.json();
+        this.setState({
+            data: data.hits,
+            amount: moreData
+        })
+    }
+
     
     render() {
         let wrap = "place-content-start place-items-center grid 2xl:grid-cols-12 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-2 col-start-1 col-end-13 pt-10";
@@ -34,7 +50,10 @@ class main extends Component {
         let noResult = Array.isArray(this.state.data) && this.state.data == false;
         return (
             <div className="w-full m-0 p-2 grid grid-cols-12 justify-center">
-                <Search search={this.search} inputRef={this.inputRef}/>
+                <header className="col-start-1 col-end-13 bg-green-400 shadow-md">
+                    <Head/>
+                    <Search search={this.search} inputRef={this.inputRef} />
+                </header>
                 <div className={wrap}>
                     {this.state.data === false && <p className={load}>Loading...</p>}
                     {this.state.data && this.state.data.map(item => {
@@ -46,8 +65,8 @@ class main extends Component {
                         )
                     })}
                     {noResult && <p className={load}>No Result</p>}
+                    {this.state.data && this.state.amount < 200 && <a onClick={this.more} className="hover:underline text-m text-blue-900 cursor-pointer">Load More...</a>}
                 </div>
-                
             </div>
         )
     }
