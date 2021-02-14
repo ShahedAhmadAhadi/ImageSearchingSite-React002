@@ -18,21 +18,29 @@ class main extends Component {
         })
         console.log(data)
     }
+
+    imageSize = (size) => {
+        if (size >= 140) {
+            return 'row-span-2 h-full'
+        }
+    }
     
     render() {
+        let wrap = "place-content-start place-items-center grid grid-cols-8 gap-2 col-start-1 col-end-13 pt-10"
         return (
             <div className="w-full m-0 p-2 grid grid-cols-12 justify-center">
                 <Search search={this.search}/>
-                {this.state.data && this.state.data.map(item => {
-                    return (
-                        <div key={item.id}>
-                            <img src={item.previewURL} />
-                        </div>
-                    )
-                })}
-                <div>
-                    
+                <div className={wrap}>
+                    {this.state.data && this.state.data.map(item => {
+                        let imageDiv = this.imageSize(item.previewHeight)
+                        return (
+                            <div key={item.id} className={imageDiv}>
+                                <img src={item.previewURL} className="p-0"/>
+                            </div>
+                        )
+                    })}
                 </div>
+                
             </div>
         )
     }
