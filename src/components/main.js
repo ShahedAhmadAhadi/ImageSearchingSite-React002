@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import {Search} from './search'
 import Head from './head'
+import Imagemodal, { imageModal } from './image-modal'
 
 class main extends Component {
     constructor(props) {
         super(props);
         this.inputRef = React.createRef();
         this.state = {
-
+            
         }
     }
 
@@ -41,15 +42,24 @@ class main extends Component {
             data: data.hits,
             amount: moreData
         })
+        console.log(data)
+    }
+
+    showBig = (item) => {
+        console.log(item)
+        this.setState({
+            bigPic: item
+        })
     }
 
     
     render() {
         let wrap = "place-content-start place-items-center grid 2xl:grid-cols-12 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-2 col-start-1 col-end-13 pt-10";
-        let load = "col-start-1 col-end-9 justify-center text-gray-300 mt-48 font-semibold text-3xl";
+        let load = "col-start-1 col-end-13 justify-center text-gray-300 mt-48 font-semibold text-3xl";
         let noResult = Array.isArray(this.state.data) && this.state.data == false;
         return (
-            <div className="w-full m-0 p-2 grid grid-cols-12 justify-center">
+            <div className="w-full m-0 p-2 grid grid-cols-12 justify-center relative">
+                {this.state.bigPic && <Imagemodal src={this.state.bigPic.webformatURL} className="col-start-1 col-end-13 absolute w-full h-full" />}
                 <header className="col-start-1 col-end-13 bg-green-400 shadow-md">
                     <Head/>
                     <Search search={this.search} inputRef={this.inputRef} />
@@ -59,13 +69,13 @@ class main extends Component {
                     {this.state.data && this.state.data.map(item => {
                         let imageDiv = this.imageSize(item.previewHeight)
                         return (
-                            <div key={item.id} className={imageDiv}>
+                            <div onClick={() => this.showBig(item)} key={item.id} className={imageDiv}>
                                 <img src={item.previewURL} className="p-0"/>
                             </div>
                         )
                     })}
                     {noResult && <p className={load}>No Result</p>}
-                    {this.state.data && this.state.amount < 200 && <a onClick={this.more} className="hover:underline text-m text-blue-900 cursor-pointer">Load More...</a>}
+                    {this.state.data && this.state.amount < 200 && !noResult && <a onClick={this.more} className="hover:underline text-m text-blue-900 cursor-pointer">Load More...</a>}
                 </div>
             </div>
         )
