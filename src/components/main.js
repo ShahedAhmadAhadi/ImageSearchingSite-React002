@@ -58,8 +58,8 @@ class main extends Component {
         let load = "col-start-1 col-end-13 justify-center text-gray-300 mt-48 font-semibold text-3xl";
         let noResult = Array.isArray(this.state.data) && this.state.data == false;
         return (
-            <div className="w-full m-0 p-2 grid grid-cols-12 justify-center relative">
-                {this.state.bigPic && <Imagemodal src={this.state.bigPic.webformatURL} className="col-start-1 col-end-13 absolute w-full h-full" />}
+            <div className="w-full m-0 p-0 grid grid-cols-12 justify-center relative">
+                {this.state.bigPic && <Imagemodal src={this.state.bigPic.webformatURL} />}
                 <header className="col-start-1 col-end-13 bg-green-400 shadow-md">
                     <Head/>
                     <Search search={this.search} inputRef={this.inputRef} />
