@@ -8,7 +8,7 @@ class main extends Component {
         super(props);
         this.inputRef = React.createRef();
         this.state = {
-            
+            visible:false
         }
     }
 
@@ -42,16 +42,23 @@ class main extends Component {
             data: data.hits,
             amount: moreData
         })
-        console.log(data)
+        console.log(this.state.data)
     }
 
     showBig = (item) => {
         console.log(item)
         this.setState({
+            visible:!this.state.visible,
             bigPic: item
         })
     }
-
+    hide = (e) => {
+        this.setState((prev)=>{
+            return ({
+                visible:!prev.visible
+            })
+        })
+    }
     
     render() {
         let wrap = "place-content-start place-items-center grid 2xl:grid-cols-12 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-2 col-start-1 col-end-13 pt-10";
@@ -59,7 +66,7 @@ class main extends Component {
         let noResult = Array.isArray(this.state.data) && this.state.data == false;
         return (
             <div className="w-full m-0 p-0 grid grid-cols-12 justify-center relative">
-                {this.state.bigPic && <Imagemodal src={this.state.bigPic.webformatURL} />}
+                {this.state.bigPic && <Imagemodal src={this.state.bigPic.largeImageURL} cls={this.state.visible?"grid":'hidden'} hide={this.hide}/>}
                 <header className="col-start-1 col-end-13 bg-green-400 shadow-md">
                     <Head/>
                     <Search search={this.search} inputRef={this.inputRef} />
