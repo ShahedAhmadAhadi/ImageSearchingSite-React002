@@ -77,9 +77,9 @@ class main extends Component {
         let load = "col-start-1 col-end-13 justify-center text-gray-300 mt-48 font-semibold text-3xl";
         let noResult = Array.isArray(this.state.data) && this.state.data == false;
         return (
-            <div className="w-full m-0 p-0 grid grid-cols-12 justify-center relative">
+            <div className={`w-full h-screen bg-red-400 m-0 p-0 grid grid-cols-12 justify-center relative`}>
                 {this.state.bigPic && <Imagemodal src={this.state.bigPic.largeImageURL} cls={this.state.visible?"grid":'hidden'} hide={this.hide}/>}
-                <header className="col-start-1 col-end-13 bg-green-400 shadow-md">
+                <header className="col-start-1 col-end-13 bg-green-400 shadow-md h-20">
                     <Head/>
                     <Search search={this.search} inputRef={this.inputRef} />
                     <ThemeChanger theme={() => this.changeTheme()} />
