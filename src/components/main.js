@@ -76,8 +76,16 @@ class main extends Component {
         let wrap = "place-content-start place-items-center grid 2xl:grid-cols-12 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-2 col-start-1 col-end-13 pt-10";
         let load = "col-start-1 col-end-13 justify-center text-gray-300 mt-48 font-semibold text-3xl";
         let noResult = Array.isArray(this.state.data) && this.state.data == false;
+        let theme_values = {
+            background: 'white'
+        }
+        if (!this.state.theme) {
+            theme_values = {
+                background: 'black'
+            }
+        }
         return (
-            <div className={`w-full h-screen bg-red-400 m-0 p-0 grid grid-cols-12 justify-center relative`}>
+            <div className={`w-full h-screen bg-${theme_values.background} m-0 p-0 grid grid-cols-12 justify-center relative`}>
                 {this.state.bigPic && <Imagemodal src={this.state.bigPic.largeImageURL} cls={this.state.visible?"grid":'hidden'} hide={this.hide}/>}
                 <header className="col-start-1 col-end-13 bg-green-400 shadow-md h-20">
                     <Head/>
