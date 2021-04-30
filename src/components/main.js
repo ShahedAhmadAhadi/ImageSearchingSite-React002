@@ -24,7 +24,7 @@ class main extends Component {
             val: value,
             amount: amount
         })
-        console.log()
+        console.log(data)
     }
 
     imageSize = (size) => {
@@ -70,6 +70,7 @@ class main extends Component {
                 <header className="col-start-1 col-end-13 bg-green-400 shadow-md">
                     <Head/>
                     <Search search={this.search} inputRef={this.inputRef} />
+                    
                 </header>
                 <div className={wrap}>
                     {this.state.data === false && <p className={load}>Loading...</p>}
