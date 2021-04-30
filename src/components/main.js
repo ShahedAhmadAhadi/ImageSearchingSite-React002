@@ -9,7 +9,8 @@ class main extends Component {
         super(props);
         this.inputRef = React.createRef();
         this.state = {
-            visible:false
+            visible:false,
+            theme: true
         }
     }
 
@@ -61,6 +62,15 @@ class main extends Component {
         })
     }
 
+    changeTheme = () => {
+        this.setState((prev)=> {
+            return ({
+                theme: !prev.theme
+            })
+        })
+        console.log(this.state.theme)
+    }
+
     
     render() {
         let wrap = "place-content-start place-items-center grid 2xl:grid-cols-12 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-2 col-start-1 col-end-13 pt-10";
@@ -72,7 +82,7 @@ class main extends Component {
                 <header className="col-start-1 col-end-13 bg-green-400 shadow-md">
                     <Head/>
                     <Search search={this.search} inputRef={this.inputRef} />
-                    <ThemeChanger />
+                    <ThemeChanger theme={() => this.changeTheme()} />
                 </header>
                 <div className={wrap}>
                     {this.state.data === false && <p className={load}>Loading...</p>}
