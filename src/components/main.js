@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Search} from './search'
 import Head from './head'
 import Imagemodal, { imageModal } from './image-modal'
+import ThemeChanger from './theme_changer_checkbox'
 
 class main extends Component {
     constructor(props) {
@@ -70,7 +71,7 @@ class main extends Component {
                 <header className="col-start-1 col-end-13 bg-green-400 shadow-md">
                     <Head/>
                     <Search search={this.search} inputRef={this.inputRef} />
-                    
+                    <ThemeChanger />
                 </header>
                 <div className={wrap}>
                     {this.state.data === false && <p className={load}>Loading...</p>}
