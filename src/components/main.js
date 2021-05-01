@@ -96,7 +96,7 @@ class main extends Component {
                 <header className={`col-start-1 col-end-13 bg-${theme_values.header_background} bg-opacity-${theme_values.header_opaciry} shadow-md h-20`}>
                     <Head theme={this.state.theme}/>
                     <Search search={this.search} inputRef={this.inputRef} theme={this.state.theme} />
-                    <ThemeChanger theme={() => this.changeTheme()} />
+                    <ThemeChanger themeChanger={() => this.changeTheme()} />
                 </header>
                 <div className={wrap}>
                     {this.state.data === false && <p className={load}>Loading...</p>}
