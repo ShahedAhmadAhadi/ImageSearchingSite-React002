@@ -73,7 +73,7 @@ class main extends Component {
 
     
     render() {
-        let wrap = "place-content-start place-items-center grid 2xl:grid-cols-12 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-2 col-start-1 col-end-13 pt-10";
+        let wrap = "place-content-start place-items-center grid 2xl:grid-cols-12 xl:grid-cols-10 lg:grid-cols-8 md:grid-cols-6 sm:grid-cols-4 grid-cols-3 gap-2 col-start-1 col-end-13";
         let load = "col-start-1 col-end-13 justify-center text-gray-300 mt-48 font-semibold text-3xl";
         let noResult = Array.isArray(this.state.data) && this.state.data == false;
         let theme_values = {
@@ -91,7 +91,7 @@ class main extends Component {
             }
         }
         return (
-            <div className={`w-full h-screen bg-${theme_values.background} bg-opacity-${theme_values.opacity} m-0 p-0 grid grid-cols-12 justify-center relative`}>
+            <div className={`w-full h-screen bg-${theme_values.background} bg-opacity-${theme_values.opacity} m-0 p-0 grid grid-cols-12 justify-center grid-rows-6 relative`}>
                 {this.state.bigPic && <Imagemodal src={this.state.bigPic.largeImageURL} cls={this.state.visible?"grid":'hidden'} hide={this.hide}/>}
                 <header className={`col-start-1 col-end-13 bg-${theme_values.header_background} bg-opacity-${theme_values.header_opaciry} shadow-md h-20`}>
                     <Head theme={this.state.theme}/>
@@ -109,7 +109,7 @@ class main extends Component {
                         )
                     })}
                     {noResult && <p className={load}>No Result</p>}
-                    {this.state.data && this.state.amount < 200 && !noResult && <a onClick={this.more} className="hover:underline text-m text-blue-900 cursor-pointer">Load More...</a>}
+                    {this.state.data && this.state.amount < 200 && !noResult && <a onClick={this.more} className={`hover:underline text-${this.state.theme ? 'blue-900': 'white'} text- cursor-pointer`}>Load More...</a>}
                 </div>
             </div>
         )
