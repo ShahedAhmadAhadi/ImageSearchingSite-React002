@@ -77,19 +77,25 @@ class main extends Component {
         let load = "col-start-1 col-end-13 justify-center text-gray-300 mt-48 font-semibold text-3xl";
         let noResult = Array.isArray(this.state.data) && this.state.data == false;
         let theme_values = {
-            background: 'white'
+            background: 'white',
+            opacity: '100',
+            header_background: 'green-400',
+            header_opaciry: '100'
         }
         if (!this.state.theme) {
             theme_values = {
-                background: 'black'
+                background: 'blue-900',
+                opacity: '100',
+                header_background: 'green-900',
+                header_opaciry: '90'
             }
         }
         return (
-            <div className={`w-full h-screen bg-${theme_values.background} m-0 p-0 grid grid-cols-12 justify-center relative`}>
+            <div className={`w-full h-screen bg-${theme_values.background} bg-opacity-${theme_values.opacity} m-0 p-0 grid grid-cols-12 justify-center relative`}>
                 {this.state.bigPic && <Imagemodal src={this.state.bigPic.largeImageURL} cls={this.state.visible?"grid":'hidden'} hide={this.hide}/>}
-                <header className="col-start-1 col-end-13 bg-green-400 shadow-md h-20">
-                    <Head/>
-                    <Search search={this.search} inputRef={this.inputRef} />
+                <header className={`col-start-1 col-end-13 bg-${theme_values.header_background} bg-opacity-${theme_values.header_opaciry} shadow-md h-20`}>
+                    <Head theme={this.state.theme}/>
+                    <Search search={this.search} inputRef={this.inputRef} theme={this.state.theme} />
                     <ThemeChanger theme={() => this.changeTheme()} />
                 </header>
                 <div className={wrap}>
